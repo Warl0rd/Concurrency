@@ -32,8 +32,12 @@ public class Operations {
 		if (acc1.getBalance() < amount)
 			throw new InsufficientFundsException();
 		
-		acc1.withdraw(amount);
-		acc2.deposit(amount);
+		synchronized (acc1) {
+			synchronized (acc2) {
+				acc1.withdraw(amount);
+				acc2.deposit(amount);
+			}
+		}
 		System.out.println("Transfer of "+amount+" completed successfully");
 		
 	}

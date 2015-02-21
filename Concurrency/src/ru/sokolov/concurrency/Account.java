@@ -1,11 +1,16 @@
 package ru.sokolov.concurrency;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Account {
 	
+	private Lock lock;
 	private int balance;
 
 	public Account(int initialBalance) {
 		this.balance = initialBalance;
+		this.lock = new ReentrantLock();
 	}
 	
 	public void withdraw(int amount) {
@@ -19,5 +24,10 @@ public class Account {
 	public int getBalance() {
 		return this.balance;
 	}
+
+	public Lock getLock() {
+		return lock;
+	}
+	
 
 }
